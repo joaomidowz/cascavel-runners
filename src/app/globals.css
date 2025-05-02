@@ -4,7 +4,7 @@
   --background: #F8F9FA;
   --primary: #212529;
   --btn-text: #FFFFFF;
-  --btn-primary: #F97316  ;
+  --btn-primary: #F97316;
   --success: #4B7A48;
   --alert: #FAB916;
 }
@@ -12,6 +12,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-primary: var(--primary);
+  --foto-fundo: var(--foto-fundo);
   --color-btn-primary: var(--btn-primary);
   --color-btn-text: var(--btn-text);
   --color-success: var(--success);
@@ -34,6 +35,11 @@ Amarelo: #FAB916
     --alert: #FAB916;
   }
 }
+
+.clip-diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
+}
+
 
 body {
   background: var(--background);
