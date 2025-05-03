@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cascavel Runners
 
-## Getting Started
+Projeto web para corredores da cidade de Cascavel, com foco em facilitar acesso a corridas, inscrições e promover a comunidade runner local.
 
-First, run the development server:
+## 🚀 Funcionalidades implementadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 🖼️ Layout e UI
+- Fundo fixo com imagem de wallpaper
+- Sobreposição diagonal estilizada com `clip-path`
+- Cores personalizadas (laranja principal: `#F97316`)
+- Ícone (favicon) personalizado com tênis minimalista branco
+
+### 🧭 Navegação
+- Navbar fixa com título "Cascavel Runners"
+- Botão hamburguer animado com `framer-motion` e ícones `react-icons`
+- Dropdown animado (abre/fecha com clipPath circular)
+- Links de navegação:
+  - Login
+  - Corridas
+  - Participar
+
+### 🖱️ Scroll & Call-to-Action
+- Animação de rolagem até o conteúdo
+- Botões com hover e animações suaves
+
+### 🖼️ Carousel
+- Carrossel de imagens feito com `swiper/react`
+- Slides com imagens ajustadas automaticamente via `next/image`
+- Cards adaptáveis ao tamanho das imagens
+
+### 📦 Footer
+- Componente Footer com texto:
+  - "Desenvolvido por Cascavel Runners"
+  - "Todos os direitos reservados © 2025"
+
+---
+
+## 📁 Estrutura do projeto
+
+```
+/public
+  ├── wallpaperImg.jpg
+  ├── caroussel-1.jpg
+  ├── caroussel-2.jpg
+  └── caroussel-3.jpg
+
+/components
+  ├── Navbar.tsx
+  ├── Carousel.tsx
+  └── Footer.tsx
+
+/app
+  └── page.tsx
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tecnologias usadas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js 13+ (App Router)**
+- **Tailwind CSS**
+- **Framer Motion**
+- **React Icons**
+- **SwiperJS**
+- **TypeScript**
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📌 Como rodar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm install
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Acesse: [http://localhost:3000](http://localhost:3000)
