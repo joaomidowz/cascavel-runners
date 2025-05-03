@@ -36,7 +36,7 @@ export default function Navbar() {
                             <li>
                                 <Link
                                     href="/login"
-                                    className="text-btn-primary text-lg hover:underline"
+                                    className="text-primary text-lg hover:underline"
                                     onClick={() => setOpen(false)}
                                 >
                                     Login
@@ -45,7 +45,7 @@ export default function Navbar() {
                             <li>
                                 <Link
                                     href="/corridas"
-                                    className="text-btn-primary text-lg hover:underline"
+                                    className="text-primary text-lg hover:underline"
                                     onClick={() => setOpen(false)}
                                 >
                                     Corridas
@@ -54,7 +54,7 @@ export default function Navbar() {
                             <li>
                                 <Link
                                     href="/participar"
-                                    className="text-btn-primary text-lg hover:underline"
+                                    className="text-primary text-lg hover:underline"
                                     onClick={() => setOpen(false)}
                                 >
                                     Participar
