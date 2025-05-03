@@ -18,7 +18,7 @@ export default function Home() {
           Bem-vindo à Cascavel Runners
         </h1>
         <button className="bg-btn-primary py-3 px-5 rounded-2xl text-btn-text cursor-pointer hover:bg-primary/60 active:bg-btn-primary/50 transition duration-500">
-          Comce a se desafiar agora!
+          Comece a se desafiar agora!
         </button>
       </div>
 

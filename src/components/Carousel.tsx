@@ -15,7 +15,7 @@ export default function Carousel() {
         >
             {[1, 2, 3].map((i) => (
                 <SwiperSlide key={i}>
-                    <div className="w-full h-60 rounded-2xl overflow-hidden shadow-lg bg-white">
+                    <div className="w-full h-60 2xl:h-[550px] rounded-2xl overflow-hidden shadow-lg bg-white">
                         <Image
                             src={`/carousel-${i}.jpg`}
                             alt={`Imagem ${i}`}
