@@ -19,6 +19,11 @@
   --color-alert: var(--alert);
 }
 
+.btn {
+  @apply bg-btn-primary py-3 px-5 rounded-2xl text-btn-text cursor-pointer 
+         hover:bg-primary/60 active:bg-btn-primary/50 transition duration-500;
+}
+
 /*
 Cores Laranja: #f7417
 Verde: #4B7A48
