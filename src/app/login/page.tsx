@@ -5,10 +5,13 @@ import { motion, AnimatePresence } from "framer-motion"
 import RunnerForm from "@/src/components/RunnerForm"
 import OrganizerForm from "@/src/components/OrganizerForm"
 import Footer from "@/src/components/Footer"
+import { IoIosArrowBack } from "react-icons/io";
+import { useRouter } from "next/navigation"
 
 export default function Login() {
   const [selected, setSelected] = useState<"corredor" | "Organizador" | null>(null)
   const [hasSelectedOnce, setHasSelectedOnce] = useState(false)
+  const router = useRouter()
 
   const handleSelect = (role: "corredor" | "Organizador") => {
     if (!hasSelectedOnce) setHasSelectedOnce(true)
@@ -35,6 +38,7 @@ export default function Login() {
 
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center overflow-hidden">
+      <IoIosArrowBack className="absolute left-5 top-5 text-2xl" onClick={() => router.back()} />
       <h1 className="text-4xl text-center py-20">Faça Login Como</h1>
 
       <div className="flex flex-row gap-10">
