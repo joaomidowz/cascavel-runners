@@ -22,7 +22,7 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="bg-background h-[100vh] mt-[55vh] p-10 z-30 relative flex flex-col items-center gap-8">
+      <div className="bg-background mt-[55vh] p-10 z-30 relative flex flex-col items-center gap-8">
         <h3 className="text-3xl text-center font-bold mb-4">🏃‍♂️ Corrida é transformação</h3>
         <div className="text-center text-lg">
           <p className="mb-4">

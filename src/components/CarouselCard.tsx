@@ -9,12 +9,13 @@ type Props = {
 
 export default function CarouselCard({ src, alt }: Props) {
   return (
-    <div className="relative w-full aspect-[3/2] sm:aspect-[16/9] lg:aspect-[2/1] rounded-3xl overflow-hidden shadow-lg">
+    <div className="relative w-full aspect-[1/2] sm:aspect-[12/8] lg:aspect-[1/1] rounded-3xl overflow-hidden shadow-lg">
       <Image
         src={src}
         alt={alt}
         fill
         className="object-cover"
+        style={{ objectPosition: '70% 30%' }}
         sizes="(max-width: 768px) 100vw, 50vw"
         priority
       />
