@@ -9,7 +9,7 @@ type Props = {
 
 export default function CarouselCard({ src, alt }: Props) {
   return (
-    <div className="relative w-full aspect-[1/2] sm:aspect-[12/8] lg:aspect-[1/1] rounded-3xl overflow-hidden shadow-lg">
+    <div className="relative w-full aspect-[1/2] sm:aspect-[12/8] lg:aspect-[5/5] rounded-3xl overflow-hidden shadow-lg">
       <Image
         src={src}
         alt={alt}
