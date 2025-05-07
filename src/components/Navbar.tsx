@@ -44,7 +44,7 @@ export default function Navbar() {
                             </li>
                             <li>
                                 <Link
-                                    href="/corridas"
+                                    href="/feed"
                                     className="text-primary text-lg hover:underline"
                                     onClick={() => setOpen(false)}
                                 >
