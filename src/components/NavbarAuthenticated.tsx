@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { FiMenu, FiX } from "react-icons/fi"
 import Link from "next/link"
 
-export default function Navbar() {
+export default function NavbarAuthenticated() {
     const [open, setOpen] = useState(false)
     const containerRef = useRef<HTMLDivElement | null>(null)
 
@@ -13,28 +13,29 @@ export default function Navbar() {
         <>
             <header className="fixed top-0 left-0 w-full z-30 bg-background px-6 py-4 flex justify-between items-center shadow-md">
                 <h1 className="text-primary text-xl font-bold">Cascavel Runners</h1>
-
-                {/* Botão só aparece no mobile */}
                 <button
                     onClick={() => setOpen(!open)}
                     className="text-btn-primary text-3xl cursor-pointer z-40 md:hidden"
                 >
                     {open ? <FiX /> : <FiMenu />}
                 </button>
-
-                {/* Menu horizontal (telas md+) */}
                 <nav className="hidden md:flex gap-8">
-                    <Link href="/login" className="text-primary hover:underline">Login</Link>
-                    <Link href="/feed" className="text-primary hover:underline">Corridas</Link>
-                    <Link href="/publicar" className="text-primary hover:underline">Publicar</Link>
+                    <Link href="/feed" className="text-primary hover:underline">Feed</Link>
+                    <Link href="/perfil" className="text-primary hover:underline">Minha Conta</Link>
+                    <button
+                        onClick={() => {
+                            // logout()
+                        }}
+                        className="text-primary hover:underline"
+                    >
+                        Sair
+                    </button>
                 </nav>
             </header>
-
-            {/* Menu dropdown (mobile) */}
             <AnimatePresence>
                 {open && (
                     <motion.nav
-                        key="menu"
+                        key="auth-menu"
                         ref={containerRef}
                         initial={{ y: -50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1, transition: { duration: 0.2 } }}
@@ -44,30 +45,32 @@ export default function Navbar() {
                         <ul className="flex flex-col items-center gap-4 py-6">
                             <li>
                                 <Link
-                                    href="/login"
-                                    className="text-primary text-lg hover:underline"
-                                    onClick={() => setOpen(false)}
-                                >
-                                    Login
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
                                     href="/feed"
                                     className="text-primary text-lg hover:underline"
                                     onClick={() => setOpen(false)}
                                 >
-                                    Corridas
+                                    Feed
                                 </Link>
                             </li>
                             <li>
                                 <Link
-                                    href="/publicar"
+                                    href="/perfil"
                                     className="text-primary text-lg hover:underline"
                                     onClick={() => setOpen(false)}
                                 >
-                                    Publicar
+                                    Minha Conta
                                 </Link>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={() => {
+                                        // logout();
+                                        setOpen(false)
+                                    }}
+                                    className="text-primary text-lg hover:underline"
+                                >
+                                    Sair
+                                </button>
                             </li>
                         </ul>
                     </motion.nav>

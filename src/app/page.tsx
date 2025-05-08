@@ -61,8 +61,6 @@ export default function Home() {
         <Carousel />
       </Reveal>
       </div>
-
-      <Footer />
     </div>
   )
 }
