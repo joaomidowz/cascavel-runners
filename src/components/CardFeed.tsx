@@ -11,7 +11,7 @@ type Props = {
 export default function CardFeed({ title, image, likes, comments }: Props) {
     return (
         <div className="bg-background shadow-md border border-primary rounded-3xl p-4 flex flex-col gap-4 items-center w-full max-w-md mx-auto">
-            <h1 className="text-xl font-semibold text-primary text-center">{title}</h1>
+            <h1 className="text-xl lg:text-2xl font-semibold text-primary text-center">{title}</h1>
 
             <div className="w-full md:aspect-square aspect-[4/3] relative rounded-3xl overflow-hidden">
                 <Image
@@ -23,7 +23,7 @@ export default function CardFeed({ title, image, likes, comments }: Props) {
                 />
             </div>
 
-            <div className="flex flex-row justify-around w-full text-sm text-btn-text">
+            <div className="flex flex-row justify-around w-full text-sm text-btn-text lg:text-xl">
                 <div className="flex items-center gap-1">
                     <FaHeart className="text-red-500" />
                     <span>{likes}</span>
@@ -38,7 +38,7 @@ export default function CardFeed({ title, image, likes, comments }: Props) {
                 </div>
             </div>
 
-            <button className="bg-btn-primary text-btn-text px-5 py-2 rounded-full hover:bg-btn-primary/10 transition-all">
+            <button className="btn lg:text-xl">
                 + Participar
             </button>
         </div>

@@ -21,7 +21,7 @@
 
 .btn {
   @apply bg-btn-primary py-3 px-5 rounded-2xl text-btn-text cursor-pointer 
-         hover:bg-primary/60 active:bg-btn-primary/50 transition duration-500;
+         hover:bg-btn-primary/50 active:bg-btn-primary/90 transition duration-500;
 }
 
 /*
