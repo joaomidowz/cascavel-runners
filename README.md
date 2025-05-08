@@ -28,12 +28,17 @@ Projeto web para corredores da cidade de Cascavel, com foco em facilitar acesso 
 - Slides com imagens ajustadas automaticamente via `next/image`
 - Cards adaptáveis ao tamanho das imagens
 
+### 🧾 Página Feed com Cards
+- Componente `CardFeed` com título, imagem, curtidas, comentários e botão de participação
+- Layout responsivo e compacto com altura controlada (sem `aspect-square` fixo)
+- Dados renderizados dinamicamente a partir de um mock JSON (`feedMock`)
+- Página `/feed` exibe uma grade responsiva com os cards
+- Footer colado ao final da tela, mesmo com pouco conteúdo
+
 ### 📦 Footer
 - Componente Footer com texto:
   - "Desenvolvido por Cascavel Runners"
   - "Todos os direitos reservados © 2025"
-
----
 
 ## 📁 Estrutura do projeto
 
@@ -42,18 +47,21 @@ Projeto web para corredores da cidade de Cascavel, com foco em facilitar acesso 
   ├── wallpaperImg.jpg
   ├── caroussel-1.jpg
   ├── caroussel-2.jpg
-  └── caroussel-3.jpg
+  ├── caroussel-3.jpg
 
-/components
+/src/components
   ├── Navbar.tsx
   ├── Carousel.tsx
-  └── Footer.tsx
+  ├── Footer.tsx
+  ├── CardFeed.tsx
 
-/app
-  └── page.tsx
+/src/app
+  ├── page.tsx        # Home
+  └── feed/page.tsx   # Página de Feed com cards
+
+/src/data
+  └── feedMock.ts     # Mock de dados para os cards do feed
 ```
-
----
 
 ## 🛠️ Tecnologias usadas
 
@@ -63,8 +71,6 @@ Projeto web para corredores da cidade de Cascavel, com foco em facilitar acesso 
 - **React Icons**
 - **SwiperJS**
 - **TypeScript**
-
----
 
 ## 📌 Como rodar
 
