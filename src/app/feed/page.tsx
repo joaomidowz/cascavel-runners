@@ -1,6 +1,5 @@
 // src/app/feed/page.tsx (ou Feed.tsx dependendo da estrutura)
 import CardFeed from "@/src/components/CardFeed";
-import Footer from "@/src/components/Footer";
 import NavbarAuthenticated from "@/src/components/NavbarAuthenticated";
 import { feedMock } from "@/src/components/data/feedMock";
 

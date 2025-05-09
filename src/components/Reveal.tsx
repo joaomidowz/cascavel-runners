@@ -1,15 +1,22 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, type Target } from "framer-motion"
 import { useRef } from "react"
 
 type Direction = "up" | "down" | "left" | "right"
 
-const variants: Record<Direction, any> = {
+const variants: Record<Direction, Target> = {
     up: { y: 50, opacity: 0 },
     down: { y: -50, opacity: 0 },
     left: { x: -50, opacity: 0 },
     right: { x: 50, opacity: 0 },
+}
+
+type RevealProps = {
+    children: React.ReactNode
+    direction?: Direction
+    duration?: number
+    delay?: number
 }
 
 export default function Reveal({
@@ -17,12 +24,7 @@ export default function Reveal({
     direction = "up",
     duration = 0.8,
     delay = 0,
-}: {
-    children: React.ReactNode
-    direction?: Direction
-    duration?: number
-    delay?: number
-}) {
+}: RevealProps) {
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true, amount: 0.2 })
 
