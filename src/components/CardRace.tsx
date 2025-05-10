@@ -11,29 +11,29 @@ type Props = {
 
 export default function CardRace({ title, image, likes, comments }: Props) {
   return (
-    <div className="bg-background shadow-md p-4 rounded-3xl flex flex-col gap-4 items-center w-full max-w-md mx-auto">
-      <h1 className="text-xl lg:text-2xl font-semibold text-primary text-center">{title}</h1>
+    <div className="bg-foreground shadow-md p-6 rounded-3xl flex flex-col gap-6 w-full max-w-4xl mx-auto">
+      <h1 className="text-2xl lg:text-3xl font-semibold text-primary">{title}</h1>
 
-      <div className="w-full aspect-[4/3] relative rounded-3xl overflow-hidden">
+      <div className="w-full aspect-[3/2] relative rounded-3xl overflow-hidden">
         <Image
           src={image}
           alt={`Imagem da corrida ${title}`}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="(max-width: 768px) 100vw, 66vw"
         />
       </div>
 
-      <div className="flex flex-row justify-around w-full text-sm text-btn-text lg:text-xl">
-        <div className="flex items-center gap-1" aria-label={`${likes} likes`}>
+      <div className="flex justify-between gap-8 text-primary text-base lg:text-lg">
+        <div className="flex items-center gap-2">
           <FaHeart className="text-red-500" />
           <span>{likes}</span>
         </div>
-        <div className="flex items-center gap-1" aria-label={`${comments} comments`}>
+        <div className="flex items-center gap-2">
           <FaComment className="text-blue-500" />
           <span>{comments}</span>
         </div>
-        <div className="flex items-center gap-1 cursor-pointer" aria-label="Salvar corrida">
+        <div className="flex items-center gap-2 cursor-pointer">
           <FaBookmark className="text-yellow-500" />
           <span>Salvar</span>
         </div>

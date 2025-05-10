@@ -2,6 +2,7 @@
 
 :root {
   --background: #F8F9FA;
+  --foreground: #495057;
   --primary: #212529;
   --btn-text: #FFFFFF;
   --btn-primary: #F97316;
@@ -11,6 +12,7 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --foto-fundo: var(--foto-fundo);
   --color-btn-primary: var(--btn-primary);
@@ -33,6 +35,7 @@ Amarelo: #FAB916
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #1E1E1E;
+    --foreground: #6C757D;
     --primary: #E9ECEF;
     --btn-text: #FFFFFF;
     --btn-primary: #F97316;
