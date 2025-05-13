@@ -1,27 +1,31 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaHeart, FaComment, FaBookmark } from "react-icons/fa";
 
 type Props = {
-    title: string,
-    image: string,
-    likes: number,
-    comments: number
-}
+    id: number;
+    title: string;
+    image: string;
+    likes: number;
+    comments: number;
+};
 
-export default function CardFeed({ title, image, likes, comments }: Props) {
+export default function CardFeed({ id, title, image, likes, comments }: Props) {
     return (
         <div className="bg-background shadow-md border border-primary rounded-3xl p-4 flex flex-col gap-4 items-center w-full max-w-md mx-auto">
-            <h1 className="text-xl lg:text-2xl font-semibold text-primary text-center">{title}</h1>
+            <Link href={`/feed/${id}/race`} className="w-full flex flex-col gap-4 items-center">
+                <h1 className="text-xl lg:text-2xl font-semibold text-primary text-center">{title}</h1>
 
-            <div className="w-full md:aspect-square aspect-[4/3] relative rounded-3xl overflow-hidden">
-                <Image
-                    src={image}
-                    alt="Corrida"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                />
-            </div>
+                <div className="w-full md:aspect-square aspect-[4/3] relative rounded-3xl overflow-hidden">
+                    <Image
+                        src={image}
+                        alt="Corrida"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                </div>
+            </Link>
 
             <div className="flex flex-row justify-around w-full text-sm text-btn-text lg:text-xl">
                 <div className="flex items-center gap-1">
@@ -38,9 +42,12 @@ export default function CardFeed({ title, image, likes, comments }: Props) {
                 </div>
             </div>
 
-            <button className="btn lg:text-xl">
-                + Participar
-            </button>
+
+            <Link href={`/feed/${id}/join`} className="w-full">
+                <button className="btn w-full lg:text-xl">
+                    + Participar
+                </button>
+            </Link>
         </div>
     );
 }
