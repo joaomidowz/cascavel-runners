@@ -9,7 +9,7 @@ type Props = {
   comments: number
 }
 
-export default function CardRace({ title, image, likes, comments }: Props) {
+export default function   CardRace({ title, image, likes, comments }: Props) {
   return (
     <div className="bg-foreground shadow-md p-6 rounded-3xl flex flex-col gap-6 w-full max-w-4xl mx-auto">
       <h1 className="text-2xl lg:text-3xl font-semibold text-primary">{title}</h1>
@@ -42,8 +42,6 @@ export default function CardRace({ title, image, likes, comments }: Props) {
       <button className="btn btn-primary px-6 py-2 rounded-2xl text-white hover:bg-primary/80 transition duration-300 text-lg">
         + Participar
       </button>
-
-      <CommentsRace />
     </div>
   )
 }
