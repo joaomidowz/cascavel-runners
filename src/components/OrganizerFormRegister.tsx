@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { register } from "../app/services/authService"
 
 export default function OrganizerFormRegister() {
   const [form, setForm] = useState({
@@ -43,15 +44,7 @@ export default function OrganizerFormRegister() {
     setLoading(true)
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/usuarios/organizador`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      })
-
-      if (!res.ok) throw new Error("Erro ao registrar organizador")
-
-      await res.json()
+      await register(form, true)
       router.push("/login")
     } catch (err: any) {
       setErro(err.message)

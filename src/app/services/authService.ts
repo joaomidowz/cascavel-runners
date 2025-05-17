@@ -1,7 +1,5 @@
-// src/services/authService.ts
-
 export async function login(email: string, senha: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, senha }),
@@ -16,7 +14,7 @@ export async function login(email: string, senha: string) {
 }
 
 export async function register(data: Record<string, any>, isOrganizer = false) {
-  const endpoint = isOrganizer ? "/usuarios/organizador" : "/usuarios";
+  const endpoint = isOrganizer ? "usuarios/organizador" : "usuarios";
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
     method: "POST",

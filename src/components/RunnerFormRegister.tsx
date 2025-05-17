@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { register } from "../app/services/authService"
 
 export default function RunnerFormRegister() {
   const [form, setForm] = useState({
@@ -32,15 +33,7 @@ export default function RunnerFormRegister() {
     setLoading(true)
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/usuarios`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      })
-
-      if (!res.ok) throw new Error("Erro ao registrar usuário")
-
-      await res.json()
+      await register(form) // ← Aqui NÃO passa isOrganizer
       router.push("/login")
     } catch (err: any) {
       setErro(err.message)
