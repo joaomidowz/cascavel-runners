@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { FaHeart, FaComment, FaBookmark } from "react-icons/fa"
-import CommentsRace from "./CommentsRace"
 
 type Props = {
   title: string

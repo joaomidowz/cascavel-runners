@@ -4,8 +4,27 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { register } from "../app/services/authService"
 
+interface UsuarioRegister {
+  nome: string
+  email: string
+  senha: string
+  fotoPerfilUrl?: string
+  biografia?: string
+  cidade?: string
+  estado?: string
+  pais?: string
+  dataNascimento?: string
+  genero?: string
+}
+
+interface OrganizadorRegister extends UsuarioRegister {
+  nomeEmpresa: string
+  cnpj: string
+  site?: string
+}
+
 export default function OrganizerFormRegister() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<OrganizadorRegister>({
     nome: "",
     email: "",
     senha: "",
@@ -43,11 +62,11 @@ export default function OrganizerFormRegister() {
     setErro("")
     setLoading(true)
 
-    const obrigatorios = [
-      "nome", "email", "senha", "cnpj"
-    ]
+    const obrigatorios = ["nome", "email", "senha", "cnpj"]
+    const faltando = obrigatorios.filter(
+      (key) => !form[key as keyof typeof form]?.trim()
+    )
 
-    const faltando = obrigatorios.filter((key) => !form[key as keyof typeof form]?.trim())
     if (faltando.length > 0) {
       setErro("Preencha todos os campos obrigatórios.")
       setLoading(false)
@@ -69,18 +88,21 @@ export default function OrganizerFormRegister() {
     try {
       const payload = {
         ...form,
-        cnpj: form.cnpj.replace(/\D/g, "") // remove .-/ etc
+        cnpj: form.cnpj.replace(/\D/g, "")
       }
 
       await register(payload, true)
       router.push("/login")
-    } catch (err: any) {
-      setErro(err.message)
+    } catch (err) {
+      if (err instanceof Error) {
+        setErro(err.message)
+      } else {
+        setErro("Erro desconhecido ao registrar.")
+      }
     } finally {
       setLoading(false)
     }
   }
-
 
   return (
     <div className="flex flex-col gap-3 px-10 pb-10">

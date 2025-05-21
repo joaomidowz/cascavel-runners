@@ -19,8 +19,12 @@ export default function LoginForm() {
       localStorage.setItem("token", data.access_token)
       localStorage.setItem("usuario", JSON.stringify(data.user))
       router.push("/")
-    } catch (err: any) {
-      setErro(err.message)
+    } catch (err) {
+      if (err instanceof Error) {
+        setErro(err.message)
+      } else {
+        setErro("Erro desconhecido ao fazer login.")
+      }
     } finally {
       setLoading(false)
     }

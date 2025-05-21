@@ -1,3 +1,22 @@
+interface UsuarioRegister {
+  nome: string;
+  email: string;
+  senha: string;
+  fotoPerfilUrl?: string;
+  biografia?: string;
+  cidade?: string;
+  estado?: string;
+  pais?: string;
+  dataNascimento?: string;
+  genero?: string;
+}
+
+interface OrganizadorRegister extends UsuarioRegister {
+  nomeEmpresa: string;
+  cnpj: string;
+  site?: string;
+}
+
 export async function login(email: string, senha: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
     method: "POST",
@@ -13,7 +32,10 @@ export async function login(email: string, senha: string) {
   return res.json();
 }
 
-export async function register(data: Record<string, any>, isOrganizer = false) {
+export async function register(
+  data: UsuarioRegister | OrganizadorRegister,
+  isOrganizer = false
+) {
   const endpoint = isOrganizer ? "usuarios/organizador" : "usuarios";
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {

@@ -38,14 +38,21 @@ export default function RunnerFormRegister() {
         dataNascimento: new Date(form.dataNascimento).toISOString()
       }
 
-      await register(payload) // envia data convertida
+      await register(payload)
       router.push("/login")
-    } catch (err: any) {
-      setErro(err.message)
+    } catch (err) {
+      if (err instanceof Error) {
+        setErro(err.message)
+      } else {
+        setErro("Erro desconhecido ao registrar.")
+      }
     } finally {
       setLoading(false)
     }
   }
+
+
+
 
 
   return (
