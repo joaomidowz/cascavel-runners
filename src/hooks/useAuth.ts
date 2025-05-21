@@ -14,9 +14,14 @@ export function useAuth() {
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("usuario", JSON.stringify(data.user));
       return data;
-    } catch (err: any) {
-      setErro(err.message);
-      throw err;
+    } catch (err) {
+      if (err instanceof Error) {
+        setErro(err.message);
+        throw err;
+      } else {
+        setErro("Erro desconhecido ao fazer login.");
+        throw new Error("Erro desconhecido ao fazer login.");
+      }
     } finally {
       setLoading(false);
     }
