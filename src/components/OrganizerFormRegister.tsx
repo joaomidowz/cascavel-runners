@@ -43,8 +43,36 @@ export default function OrganizerFormRegister() {
     setErro("")
     setLoading(true)
 
+    const obrigatorios = [
+      "nome", "email", "senha", "cnpj"
+    ]
+
+    const faltando = obrigatorios.filter((key) => !form[key as keyof typeof form]?.trim())
+    if (faltando.length > 0) {
+      setErro("Preencha todos os campos obrigatórios.")
+      setLoading(false)
+      return
+    }
+
+    if (!form.email.includes("@")) {
+      setErro("E-mail inválido.")
+      setLoading(false)
+      return
+    }
+
+    if (form.senha.length < 6) {
+      setErro("A senha deve ter no mínimo 6 caracteres.")
+      setLoading(false)
+      return
+    }
+
     try {
-      await register(form, true)
+      const payload = {
+        ...form,
+        cnpj: form.cnpj.replace(/\D/g, "") // remove .-/ etc
+      }
+
+      await register(payload, true)
       router.push("/login")
     } catch (err: any) {
       setErro(err.message)
@@ -52,6 +80,7 @@ export default function OrganizerFormRegister() {
       setLoading(false)
     }
   }
+
 
   return (
     <div className="flex flex-col gap-3 px-10 pb-10">

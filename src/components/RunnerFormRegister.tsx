@@ -33,7 +33,12 @@ export default function RunnerFormRegister() {
     setLoading(true)
 
     try {
-      await register(form) // ← Aqui NÃO passa isOrganizer
+      const payload = {
+        ...form,
+        dataNascimento: new Date(form.dataNascimento).toISOString()
+      }
+
+      await register(payload) // envia data convertida
       router.push("/login")
     } catch (err: any) {
       setErro(err.message)
@@ -41,6 +46,7 @@ export default function RunnerFormRegister() {
       setLoading(false)
     }
   }
+
 
   return (
     <div className="flex flex-col gap-3 px-10 pb-10">
