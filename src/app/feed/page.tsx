@@ -1,7 +1,7 @@
 // src/app/feed/page.tsx
-import CardFeed from "@/src/components/CardFeed";
-import NavbarAuthenticated from "@/src/components/NavbarAuthenticated";
-import { feedMock } from "@/src/components/data/feedMock";
+import CardFeed from "@/components/CardFeed";
+import NavbarAuthenticated from "@/components/NavbarAuthenticated";
+import { feedMock } from "@/components/data/feedMock";
 
 export default function Feed() {
     return (

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { login } from "../app/services/authService"
+import { login } from "../services/authService"
 
 export default function LoginForm() {
   const [email, setEmail] = useState("")
@@ -18,7 +18,7 @@ export default function LoginForm() {
       const data = await login(email, senha)
       localStorage.setItem("token", data.access_token)
       localStorage.setItem("usuario", JSON.stringify(data.user))
-      router.push("/")
+      router.push("/feed")
     } catch (err) {
       if (err instanceof Error) {
         setErro(err.message)

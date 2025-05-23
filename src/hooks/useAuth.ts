@@ -1,6 +1,6 @@
 // src/hooks/useAuth.ts
 import { useState } from "react";
-import { login } from "../app/services/authService";
+import { login } from "../services/authService";
 
 export function useAuth() {
   const [loading, setLoading] = useState(false);

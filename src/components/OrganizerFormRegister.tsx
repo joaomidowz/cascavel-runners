@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { register } from "../app/services/authService"
+import { register } from "../services/authService"
 
 interface UsuarioRegister {
   nome: string

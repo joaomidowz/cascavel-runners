@@ -1,8 +1,8 @@
 "use client";
 
-import JoinForm from "@/src/components/JoinForm";
+import JoinForm from "@/components/JoinForm";
 import { useParams, useRouter } from "next/navigation";
-import { feedMock } from "@/src/components/data/feedMock";
+import { feedMock } from "@/components/data/feedMock";
 import Image from "next/image";
 import { IoIosArrowBack } from "react-icons/io";
 

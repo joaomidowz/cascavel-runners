@@ -4,8 +4,8 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { IoIosArrowBack } from "react-icons/io"
 import { useRouter } from "next/navigation"
-import OrganizerFormRegister from "@/src/components/OrganizerFormRegister"
-import RunnerFormRegister from "@/src/components/RunnerFormRegister"
+import OrganizerFormRegister from "@/components/OrganizerFormRegister"
+import RunnerFormRegister from "@/components/RunnerFormRegister"
 
 export default function Register() {
   const [selected, setSelected] = useState<"corredor" | "Organizador" | null>(null)

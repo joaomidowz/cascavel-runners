@@ -1,6 +1,6 @@
 "use client"
 
-import LoginForm from "@/src/components/LoginForm"
+import LoginForm from "@/components/LoginForm"
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation"
 

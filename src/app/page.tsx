@@ -1,8 +1,8 @@
 "use client"
 
-import Carousel from "../components/Carousel"
-import Navbar from "../components/Navbar"
-import Reveal from "../components/Reveal"
+import Carousel from "@/components/Carousel"
+import Navbar from "@/components/Navbar"
+import Reveal from "@/components/Reveal"
 
 export default function Home() {
   return (
