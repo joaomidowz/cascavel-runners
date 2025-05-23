@@ -1,5 +1,12 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type User = {
   id: number;
@@ -13,6 +20,7 @@ type AuthContextType = {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
+  loading: boolean;
   login: (email: string, senha: string) => Promise<void>;
   logout: () => void;
 };
@@ -22,17 +30,28 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
+  // Restaurar auth do localStorage ao carregar
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    const storedUser = localStorage.getItem("user");
-    if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
+    try {
+      const storedToken = localStorage.getItem("token");
+      const storedUser = localStorage.getItem("usuario");
+
+      if (storedToken && storedUser) {
+        setToken(storedToken);
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (err) {
+      console.error("Erro ao restaurar autenticação:", err);
+      localStorage.removeItem("token");
+      localStorage.removeItem("usuario");
+    } finally {
+      setLoading(false);
     }
   }, []);
 
-  const login = async (email: string, senha: string) => {
+  const login = useCallback(async (email: string, senha: string) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -40,28 +59,42 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     });
 
     if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.message || "Erro ao fazer login");
+      let message = "Erro ao fazer login";
+      try {
+        const err = await res.json();
+        message = err.message || message;
+      } catch {
+        message = await res.text();
+      }
+      throw new Error(message);
     }
 
     const { access_token, user } = await res.json();
 
-    // Armazena local e em memória
     localStorage.setItem("token", access_token);
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("usuario", JSON.stringify(user));
     setToken(access_token);
     setUser(user);
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("usuario");
     setToken(null);
     setUser(null);
-  };
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ user, token, isAuthenticated: !!token, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        token,
+        isAuthenticated: !!token,
+        loading,
+        login,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
