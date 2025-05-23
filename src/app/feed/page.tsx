@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import CardFeed from "@/components/CardFeed";
 import NavbarAuthenticated from "@/components/NavbarAuthenticated";
-import { getEventos } from "@/services/getEventos";
+import { getEvent } from "@/services/eventService";
 
 const fallbackImages = [
     "carousel-1.jpg",
@@ -17,7 +17,7 @@ export default function Feed() {
     const [erro, setErro] = useState("");
 
     useEffect(() => {
-        getEventos()
+        getEvent()
             .then((data) => {
                 setEventos(data.data || []);
             })
