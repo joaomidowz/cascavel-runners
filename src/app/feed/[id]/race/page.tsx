@@ -1,10 +1,10 @@
 "use client"
 
 import { useParams, useRouter } from "next/navigation"
-import { feedMock } from "@/src/components/data/feedMock"
-import CardRace from "@/src/components/CardRace"
+import { feedMock } from "@/components/data/feedMock"
+import CardRace from "@/components/CardRace"
 import { IoIosArrowBack } from "react-icons/io"
-import CommentsRace from "@/src/components/CommentsRace"
+import CommentsRace from "@/components/CommentsRace"
 
 export default function RacePage() {
   const params = useParams()

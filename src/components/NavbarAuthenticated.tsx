@@ -25,7 +25,7 @@ export default function NavbarAuthenticated() {
       <nav className="flex gap-6 items-center">
         <Link href="/feed" className="text-primary hover:underline">Corridas</Link>
         {isOrganizador && <Link href="/create-event" className="text-primary hover:underline">Criar Corrida</Link>}
-        <Link href="/publicar" className="text-primary hover:underline">Publicar</Link>
+        <Link href="/conta" className="text-primary hover:underline">Minha Conta</Link>
         <button onClick={handleLogout} className="text-red-500 hover:underline">Sair</button>
       </nav>
     </header>
