@@ -5,10 +5,11 @@ import { useAuth } from "@/context/AuthContext";
 import { getUserById, deleteUserById } from "@/services/profileService";
 import ProfileCard from "@/components/ProfileCard";
 import { useRouter } from "next/navigation";
+import { UserProfile } from "@/types/UserProfile";
 
 export default function ProfilePage() {
   const { token, user, logout } = useAuth();
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
@@ -23,12 +24,12 @@ export default function ProfilePage() {
 
     getUserById(user.id, token)
       .then(setProfile)
-      .catch((err) => setError(err.message))
+      .catch((err) => {
+        if (err instanceof Error) setError(err.message);
+        else setError("Erro ao carregar perfil.");
+      })
       .finally(() => setLoading(false));
   }, [token, user]);
-
-
-
 
   const handleDelete = async () => {
     if (!user || !token) return;
@@ -41,14 +42,13 @@ export default function ProfilePage() {
       await deleteUserById(user.id, token);
       await logout();
       router.replace("/");
-    } catch (err: any) {
-      setError(err.message || "Failed to delete account");
+    } catch (err) {
+      if (err instanceof Error) setError(err.message);
+      else setError("Failed to delete account");
     } finally {
       setDeleting(false);
     }
   };
-
-
 
   if (loading) return <p className="text-center mt-20">Loading profile...</p>;
   if (error) return <p className="text-red-500 text-center mt-20">{error}</p>;
