@@ -1,7 +1,9 @@
+import { Event } from "@/types/Event";
+
 const API_BASE = `${process.env.NEXT_PUBLIC_API_URL}eventos`;
 
 // Buscar todos os eventos
-export async function getEvent() {
+export async function getEvent(): Promise<{ data: Event[] }> {
   const res = await fetch(API_BASE, {
     method: "GET",
     headers: {
@@ -15,7 +17,7 @@ export async function getEvent() {
 }
 
 // Buscar um evento específico por ID
-export async function getEventById(id: number) {
+export async function getEventById(id: number): Promise<Event> {
   const res = await fetch(`${API_BASE}/${id}`, {
     method: "GET",
     headers: {
@@ -29,7 +31,7 @@ export async function getEventById(id: number) {
 }
 
 // Criar novo evento
-export async function createEvent(data: any, token: string) {
+export async function createEvent(data: Partial<Event>, token: string): Promise<Event> {
   const res = await fetch(API_BASE, {
     method: "POST",
     headers: {
@@ -39,7 +41,7 @@ export async function createEvent(data: any, token: string) {
     body: JSON.stringify(data),
   });
 
-  const responseText = await res.text(); // pegar texto cru pra debug
+  const responseText = await res.text();
 
   if (!res.ok) {
     console.error("Erro da API (bruto):", responseText);
@@ -60,7 +62,7 @@ export async function createEvent(data: any, token: string) {
 }
 
 // Função interna para lidar com erros genéricos
-async function formatError(res: Response) {
+async function formatError(res: Response): Promise<Error> {
   try {
     const json = await res.json();
     return new Error(json.message || "Erro inesperado.");

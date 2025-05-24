@@ -3,7 +3,23 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createEvent } from "@/services/eventService";
-import { useAuth } from "@/context/AuthContext"; // ajuste o caminho se necessário
+import { useAuth } from "@/context/AuthContext";
+
+interface CreateEventFormState {
+  nome: string;
+  descricao: string;
+  localizacao: string;
+  dataInicio: string;
+  dataFim: string;
+  prazoInscricao: string;
+  capacidadeMaxima: string;
+  taxaInscricao: string;
+  modalidade: string;
+  siteOficial: string;
+  categoriaIds: string;
+  status: string;
+  capaFile: File | null;
+}
 
 export default function CreateEventForm() {
   const router = useRouter();
@@ -11,7 +27,7 @@ export default function CreateEventForm() {
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState("");
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<CreateEventFormState>({
     nome: "",
     descricao: "",
     localizacao: "",
@@ -24,7 +40,7 @@ export default function CreateEventForm() {
     siteOficial: "",
     categoriaIds: "",
     status: "Agendado",
-    capaFile: null as File | null,
+    capaFile: null,
   });
 
   const handleChange = (
@@ -53,27 +69,26 @@ export default function CreateEventForm() {
         : "";
 
       const payload = {
-  nome: form.nome,
-  descricao: form.descricao || undefined,
-  localizacao: form.localizacao || undefined,
-  dataInicio: new Date(form.dataInicio).toISOString(),
-  dataFim: form.dataFim ? new Date(form.dataFim).toISOString() : undefined,
-  prazoInscricao: form.prazoInscricao ? new Date(form.prazoInscricao).toISOString() : undefined,
-  capacidadeMaxima: form.capacidadeMaxima
-    ? parseInt(form.capacidadeMaxima)
-    : undefined,
-  taxaInscricao: form.taxaInscricao
-    ? parseFloat(form.taxaInscricao.replace(",", "."))
-    : undefined,
-  modalidade: form.modalidade || undefined,
-  siteOficial: form.siteOficial || undefined,
-  categoriaIds: form.categoriaIds
-    ? form.categoriaIds.split(",").map((id) => parseInt(id.trim()))
-    : undefined,
-  status: form.status,
-  capaUrl,
-};
-
+        nome: form.nome,
+        descricao: form.descricao || undefined,
+        localizacao: form.localizacao || undefined,
+        dataInicio: new Date(form.dataInicio).toISOString(),
+        dataFim: form.dataFim ? new Date(form.dataFim).toISOString() : undefined,
+        prazoInscricao: form.prazoInscricao ? new Date(form.prazoInscricao).toISOString() : undefined,
+        capacidadeMaxima: form.capacidadeMaxima
+          ? parseInt(form.capacidadeMaxima)
+          : undefined,
+        taxaInscricao: form.taxaInscricao
+          ? parseFloat(form.taxaInscricao.replace(",", "."))
+          : undefined,
+        modalidade: form.modalidade || undefined,
+        siteOficial: form.siteOficial || undefined,
+        categoriaIds: form.categoriaIds
+          ? form.categoriaIds.split(",").map((id) => parseInt(id.trim()))
+          : undefined,
+        status: form.status,
+        capaUrl,
+      };
 
       await createEvent(payload, token);
       router.push("/feed");
@@ -107,7 +122,7 @@ export default function CreateEventForm() {
             <textarea
               className="rounded-3xl py-3 px-5 bg-background outline-1 outline-primary w-full"
               name={name}
-              value={(form as any)[name]}
+              value={form[name as keyof CreateEventFormState] as string}
               onChange={handleChange}
             />
           ) : (
@@ -115,7 +130,7 @@ export default function CreateEventForm() {
               className="rounded-3xl py-3 px-5 bg-background outline-1 outline-primary w-full"
               type={type}
               name={name}
-              value={(form as any)[name]}
+              value={form[name as keyof CreateEventFormState] as string}
               onChange={handleChange}
               required={name === "nome" || name === "dataInicio"}
             />

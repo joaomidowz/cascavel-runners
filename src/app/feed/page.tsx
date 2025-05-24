@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import CardFeed from "@/components/CardFeed";
 import NavbarAuthenticated from "@/components/NavbarAuthenticated";
 import { getEvent } from "@/services/eventService";
+import { Event } from "@/types/Event";
 
 const fallbackImages = [
     "carousel-1.jpg",
@@ -12,7 +13,7 @@ const fallbackImages = [
 ];
 
 export default function Feed() {
-    const [eventos, setEventos] = useState<any[]>([]);
+    const [eventos, setEventos] = useState<Event[]>([]);
     const [loading, setLoading] = useState(true);
     const [erro, setErro] = useState("");
 
@@ -45,7 +46,7 @@ export default function Feed() {
                             key={evento.id}
                             id={evento.id}
                             title={evento.nome}
-                            image={`/${fallbackImages[index % fallbackImages.length]}`} // 🔥 aqui rotaciona certinho
+                            image={`/${fallbackImages[index % fallbackImages.length]}`}
                             likes={0}
                             comments={0}
                         />

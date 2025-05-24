@@ -7,6 +7,16 @@ import CardRace from "@/components/CardRace";
 import CommentsRace from "@/components/CommentsRace";
 import { IoIosArrowBack } from "react-icons/io";
 
+interface Event {
+  id: number;
+  nome: string;
+  descricao: string;
+  localizacao: string;
+  dataInicio: string;
+  dataFim: string;
+  capaUrl?: string;
+}
+
 const fallbackImages = [
   "carousel-1.jpg",
   "carousel-2.jpg",
@@ -14,9 +24,9 @@ const fallbackImages = [
 ];
 
 export default function RacePage() {
-  const params = useParams();
+  const params = useParams<{ id: string }>();
   const router = useRouter();
-  const [evento, setEvento] = useState<any>(null);
+  const [evento, setEvento] = useState<Event | null>(null);
   const [erro, setErro] = useState("");
   const raceId = Number(params.id);
 

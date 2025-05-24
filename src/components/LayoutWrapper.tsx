@@ -10,7 +10,6 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const isAuthPage = ["/login", "/register"].includes(pathname);
-  const isHome = pathname === "/";
 
   useEffect(() => {
     const token = localStorage.getItem("token");

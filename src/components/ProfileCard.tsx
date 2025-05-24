@@ -2,7 +2,6 @@ import Image from "next/image";
 import { FaTrash, FaEdit, FaSave } from "react-icons/fa";
 import ConfirmationModal from "./ConfirmationModal";
 import { useState } from "react";
-
 import { updateUserById } from "@/services/profileService";
 import { useAuth } from "@/context/AuthContext";
 
@@ -16,6 +15,14 @@ type Props = {
   pais?: string;
   onDelete?: () => void;
   deleting?: boolean;
+};
+
+type ProfileFormData = {
+  nome: string;
+  biografia: string;
+  cidade: string;
+  estado: string;
+  pais: string;
 };
 
 export default function ProfileCard({
@@ -32,7 +39,13 @@ export default function ProfileCard({
   const { user, token } = useAuth();
   const [showConfirm, setShowConfirm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [form, setForm] = useState({ nome: name, biografia: bio || "", cidade: cidade || "", estado: estado || "", pais: pais || "" });
+  const [form, setForm] = useState<ProfileFormData>({
+    nome: name,
+    biografia: bio || "",
+    cidade: cidade || "",
+    estado: estado || "",
+    pais: pais || "",
+  });
   const [erro, setErro] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -49,8 +62,9 @@ export default function ProfileCard({
     try {
       await updateUserById(user.id, form, token);
       setIsEditing(false);
-    } catch (err: any) {
-      setErro(err.message || "Erro ao salvar alterações");
+    } catch (err) {
+      if (err instanceof Error) setErro(err.message);
+      else setErro("Erro ao salvar alterações");
     } finally {
       setSaving(false);
     }

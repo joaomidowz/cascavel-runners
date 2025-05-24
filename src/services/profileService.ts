@@ -1,7 +1,9 @@
+import { UserProfile } from "@/types/UserProfile";
+
 const API_BASE = `${process.env.NEXT_PUBLIC_API_URL}usuarios`;
 
 // Get user by ID
-export async function getUserById(id: number, token: string) {
+export async function getUserById(id: number, token: string): Promise<UserProfile> {
   const res = await fetch(`${API_BASE}/${id}`, {
     method: "GET",
     headers: {
@@ -16,7 +18,11 @@ export async function getUserById(id: number, token: string) {
 }
 
 // Update user by ID (only own profile unless ADMIN)
-export async function updateUserById(id: number, data: any, token: string) {
+export async function updateUserById(
+  id: number,
+  data: Partial<UserProfile>,
+  token: string
+): Promise<UserProfile> {
   const res = await fetch(`${API_BASE}/${id}`, {
     method: "PATCH",
     headers: {
@@ -31,7 +37,7 @@ export async function updateUserById(id: number, data: any, token: string) {
 }
 
 // Delete user by ID (only own profile unless ADMIN)
-export async function deleteUserById(id: number, token: string) {
+export async function deleteUserById(id: number, token: string): Promise<{ message: string }> {
   const res = await fetch(`${API_BASE}/${id}`, {
     method: "DELETE",
     headers: {
@@ -40,11 +46,11 @@ export async function deleteUserById(id: number, token: string) {
   });
 
   if (!res.ok) throw await handleError(res);
-  return res.json(); // { message: "Usuário removido com sucesso" }
+  return res.json();
 }
 
 // Get all users (ADMIN only)
-export async function getAllUsers(token: string) {
+export async function getAllUsers(token: string): Promise<UserProfile[]> {
   const res = await fetch(API_BASE, {
     method: "GET",
     headers: {
@@ -58,7 +64,7 @@ export async function getAllUsers(token: string) {
 }
 
 // Generic error handler
-async function handleError(res: Response) {
+async function handleError(res: Response): Promise<Error> {
   try {
     const json = await res.json();
     return new Error(json.message || "Unexpected error");
