@@ -1,7 +1,8 @@
-interface UsuarioRegister {
+export interface UsuarioRegister {
   nome: string;
   email: string;
   senha: string;
+  cpf: string;
   fotoPerfilUrl?: string;
   biografia?: string;
   cidade?: string;
@@ -11,10 +12,21 @@ interface UsuarioRegister {
   genero?: string;
 }
 
-interface OrganizadorRegister extends UsuarioRegister {
-  nomeEmpresa: string;
+export interface OrganizadorRegister {
+  nome: string;
+  email: string;
+  senha: string;
   cnpj: string;
+  nomeEmpresa: string;
+  cpf: string;
   site?: string;
+  fotoPerfilUrl?: string;
+  biografia?: string;
+  cidade?: string;
+  estado?: string;
+  pais?: string;
+  dataNascimento?: string;
+  genero?: string;
 }
 
 export async function login(email: string, senha: string) {
@@ -32,13 +44,8 @@ export async function login(email: string, senha: string) {
   return res.json();
 }
 
-export async function register(
-  data: UsuarioRegister | OrganizadorRegister,
-  isOrganizer = false
-) {
-  const endpoint = isOrganizer ? "usuarios/organizador" : "usuarios";
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
+export async function registerUser(data: UsuarioRegister) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}usuarios`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -46,7 +53,25 @@ export async function register(
 
   if (!res.ok) {
     const err = await res.json();
-    throw new Error(err.message || "Erro ao registrar");
+    throw new Error(err.message || "Erro ao registrar usuário");
+  }
+
+  return res.json();
+}
+
+export async function registerOrganizer(data: OrganizadorRegister) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}usuarios/organizador`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.message || "Erro ao registrar organizador");
   }
 
   return res.json();
