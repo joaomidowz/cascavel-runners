@@ -7,6 +7,7 @@ import ProfileCard from "@/components/ProfileCard";
 import { useRouter } from "next/navigation";
 import { UserProfile } from "@/types/UserProfile";
 import MyRaceRegistrations from "@/components/MyRaceRegistrations";
+import OrganizerRegistrations from "@/components/OrganizerRegistrations";
 
 export default function ProfilePage() {
   const { token, user, logout } = useAuth();
@@ -71,9 +72,16 @@ export default function ProfilePage() {
         />
       </div>
 
-      <div className="w-full max-w-4xl mt-10 flex flex-col items-center">
-        <MyRaceRegistrations />
-      </div>
+      {user?.nivelPermissao === 1 ? (
+        <div className="w-full max-w-4xl mt-10 flex flex-col items-center">
+          <OrganizerRegistrations />
+        </div>
+      ) : (
+        <div className="w-full max-w-4xl mt-10 flex flex-col items-center">
+          <MyRaceRegistrations />
+        </div>
+      )}
+
     </div>
   );
 

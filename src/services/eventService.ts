@@ -71,3 +71,18 @@ async function formatError(res: Response): Promise<Error> {
     return new Error(text || "Erro desconhecido.");
   }
 }
+
+// src/services/eventRegistrationService.ts
+export async function getOrganizerRegistrations(token: string) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}evento-inscricoes`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Erro ao buscar inscrições dos seus eventos");
+  return res.json(); // { data: [...], meta: {...} }
+}
+
