@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaHeart, FaComment, FaBookmark } from "react-icons/fa";
 
 type Props = {
+  id: number;
   title: string;
   image: string;
   likes: number;
@@ -11,7 +13,9 @@ type Props = {
   descricao?: string;
 };
 
+
 export default function CardRace({
+  id,
   title,
   image,
   likes,
@@ -67,9 +71,11 @@ export default function CardRace({
         </div>
       </div>
 
-      <button className="btn btn-primary px-6 py-2 rounded-2xl text-white hover:bg-primary/80 transition duration-300 text-lg">
-        + Participar
-      </button>
+      <Link href={`/feed/${id}/join`} className="w-full">
+        <button className="btn w-full lg:text-xl">
+          + Participar
+        </button>
+      </Link>
     </div>
   );
 }

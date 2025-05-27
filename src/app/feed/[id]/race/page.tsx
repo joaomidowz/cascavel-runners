@@ -52,6 +52,7 @@ export default function RacePage() {
       />
 
       <CardRace
+        id={evento.id}
         title={evento.nome}
         image={`/${fallbackImages[evento.id % fallbackImages.length]}`}
         likes={0}
@@ -60,6 +61,7 @@ export default function RacePage() {
         localizacao={evento.localizacao}
         descricao={evento.descricao}
       />
+
 
       <div className="mt-6 w-full max-w-4xl">
         <CommentsRace />
