@@ -31,3 +31,19 @@ export async function registerToEvent(payload: RegisterEventPayload, token: stri
 
   return res.json();
 }
+
+
+// src/services/eventRegistrationService.ts (complemento do que já fizemos)
+
+export async function getMyRegistrations(token: string) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}evento-inscricoes/minhas-inscricoes`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Erro ao buscar inscrições");
+  return res.json(); // { data: [...], meta: {...} }
+}

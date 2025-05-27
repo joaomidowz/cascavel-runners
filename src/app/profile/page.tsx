@@ -6,6 +6,7 @@ import { getUserById, deleteUserById } from "@/services/profileService";
 import ProfileCard from "@/components/ProfileCard";
 import { useRouter } from "next/navigation";
 import { UserProfile } from "@/types/UserProfile";
+import MyRaceRegistrations from "@/components/MyRaceRegistrations";
 
 export default function ProfilePage() {
   const { token, user, logout } = useAuth();
@@ -55,18 +56,25 @@ export default function ProfilePage() {
   if (!profile) return null;
 
   return (
-    <div className="pt-28 pb-20 flex justify-center min-h-[calc(100vh-80px)]">
-      <ProfileCard
-        name={profile.nome}
-        email={profile.email}
-        bio={profile.biografia}
-        photo={profile.fotoPerfilUrl}
-        cidade={profile.cidade}
-        estado={profile.estado}
-        pais={profile.pais}
-        onDelete={handleDelete}
-        deleting={deleting}
-      />
+    <div className="pt-28 pb-20 px-4 min-h-[calc(100vh-80px)] flex flex-col items-center">
+      <div className="w-full max-w-md">
+        <ProfileCard
+          name={profile.nome}
+          email={profile.email}
+          bio={profile.biografia}
+          photo={profile.fotoPerfilUrl}
+          cidade={profile.cidade}
+          estado={profile.estado}
+          pais={profile.pais}
+          onDelete={handleDelete}
+          deleting={deleting}
+        />
+      </div>
+
+      <div className="w-full max-w-4xl mt-10 flex flex-col items-center">
+        <MyRaceRegistrations />
+      </div>
     </div>
   );
+
 }
