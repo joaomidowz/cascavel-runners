@@ -36,10 +36,13 @@ export default function JoinForm({ eventoId }: Props) {
             );
 
             router.push("/profile");
-        } catch (err: any) {
+        } catch (err) {
+            const message =
+                err instanceof Error ? err.message : "Erro ao tentar se inscrever no evento.";
             console.error(err);
-            alert("Erro ao tentar se inscrever no evento.");
+            alert(message);
         }
+
     };
 
     return (
