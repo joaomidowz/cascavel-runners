@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import CardFeed from "@/components/CardFeed";
-import NavbarAuthenticated from "@/components/NavbarAuthenticated";
 import { getEvent } from "@/services/eventService";
 import { Event } from "@/types/Event";
 
@@ -32,7 +31,6 @@ export default function Feed() {
     return (
         <div className="bg-background min-h-screen flex flex-col justify-between items-center">
             <div className="mb-10">
-                <NavbarAuthenticated />
             </div>
 
             {loading ? (
