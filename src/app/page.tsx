@@ -3,6 +3,7 @@
 import Carousel from "@/components/Carousel"
 import Navbar from "@/components/Navbar"
 import Reveal from "@/components/Reveal"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -26,9 +27,12 @@ export default function Home() {
         </Reveal>
 
         <Reveal direction="up" delay={0.1}>
+          <Link
+          href="/register">
           <button className="bg-btn-primary py-3 px-5 rounded-2xl text-btn-text cursor-pointer hover:bg-primary/60 active:bg-btn-primary/50 transition duration-500">
             Comece a se desafiar agora!
           </button>
+          </Link>
         </Reveal>
       </div>
 
